@@ -1,0 +1,21 @@
+# .graphqlconfig=/Users/bilbil/Work/aniChartUnoficial/app/src/main/graphql/com/apollographql/apollo/simple!
+
+query getAnimeById($id: Int) {
+    Media (id: $id, type: ANIME) {
+        id
+        title {
+            romaji
+            english
+            native
+        }
+    }
+}
+
+query seasonImage($season: MediaSeason, $seasonYear: Int) {
+    Media(season: $season, seasonYear: $seasonYear, type: ANIME, sort: [POPULARITY_DESC], format: TV) {
+        coverImage {
+            medium
+            large
+        }
+    }
+}

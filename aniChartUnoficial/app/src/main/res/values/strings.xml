@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AniChart</string>
+    <string name="winter">Winter</string>
+    <string name="winter_n2019">Winter\n2019</string>
+    <string name="spring_n2019">Spring\n2019</string>
+    <string name="summer_n2019">Summer\n2019</string>
+    <string name="fall_n2019">Fall\n2019</string>
+    <string name="_2019">2019</string>
+</resources>
