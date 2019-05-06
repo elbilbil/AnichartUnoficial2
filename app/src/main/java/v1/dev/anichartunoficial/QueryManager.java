@@ -28,6 +28,10 @@ import okhttp3.OkHttpClient;
 class QueryManager {
 
     private ApolloClient apolloClient;
+    public boolean winter_progress = false;
+    public boolean spring_progress = false;
+    public boolean fall_progress = false;
+    public boolean summer_progress = false;
 
     QueryManager(){
         String BASE_URL = "https://graphql.anilist.co/";
@@ -39,7 +43,7 @@ class QueryManager {
     }
 
 
-    public void setImageSeasonQuery(SeasonImageQuery seasonImageQuery, final ImageButton imageButton, final MainActivity mainActivity) {
+    public void setImageSeasonQuery(SeasonImageQuery seasonImageQuery, final ImageButton imageButton, final int idButton, final MainActivity mainActivity) {
         apolloClient.query(seasonImageQuery).enqueue(new ApolloCall.Callback<SeasonImageQuery.Data>() {
             @Override
             public void onResponse(@NotNull final Response<SeasonImageQuery.Data> response) {
@@ -58,6 +62,19 @@ class QueryManager {
                                         imageButton.setImageBitmap(resource);
                                         imageButton.setAdjustViewBounds(true);
                                         imageButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                        Log.d("TOTOO", String.valueOf(imageButton.getId()));
+                                        Log.d("Image", String.valueOf(R.id.winterButton));
+
+                                        switch (imageButton.getId()){
+                                            case R.id.winterButton:
+                                                winter_progress = true;
+                                            case R.id.springButton:
+                                                spring_progress = true;
+                                            case R.id.fallButton:
+                                                fall_progress = true;
+                                            case R.id.summerButton:
+                                                summer_progress = true;
+                                        }
                                     }
                                     @Override
                                     public void onLoadCleared(@Nullable Drawable placeholder) {

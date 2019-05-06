@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011"
+        app:layout_constraintVertical_bias="0.005"
         app:srcCompat="@drawable/homepage" />
 
     <ImageButton
@@ -237,5 +237,70 @@
         app:layout_constraintStart_toStartOf="@+id/springTextView"
         app:layout_constraintTop_toTopOf="@+id/springTextView"
         app:layout_constraintVertical_bias="0.45" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_winter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/winterTextView"
+        app:layout_constraintEnd_toEndOf="@+id/winterTextView"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="@+id/winterTextView"
+        style="@android:style/Widget.Holo.Light.ProgressBar" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_spring"
+        style="@android:style/Widget.Holo.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="40dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/yearTextView2"
+        app:layout_constraintEnd_toEndOf="@+id/springTextView"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@+id/springTextView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_fall"
+        style="@android:style/Widget.Holo.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="28dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/yearTextView3"
+        app:layout_constraintEnd_toEndOf="@+id/fallTextView"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toStartOf="@+id/fallTextView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_summer"
+        style="@android:style/Widget.Holo.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="28dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/yearTextView4"
+        app:layout_constraintEnd_toEndOf="@+id/summerTextView"
+        app:layout_constraintHorizontal_bias="0.402"
+        app:layout_constraintStart_toStartOf="@+id/summerTextView" />
+
 
 </android.support.constraint.ConstraintLayout>
