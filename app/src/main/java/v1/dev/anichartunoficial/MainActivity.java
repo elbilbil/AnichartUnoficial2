@@ -46,9 +46,21 @@ public class MainActivity extends AppCompatActivity {
         progressBarFall = findViewById(R.id.progressBar_fall);
         progressBarSummer = findViewById(R.id.progressBar_summer);
 
-        Thread winter_wait = new Thread(new Runnable() {
+        Thread loader_thread = new Thread(new Runnable() {
             public void run() {
-                while (!queryManager.winter_progress) {
+                while (!queryManager.winter_progress ||
+                        !queryManager.spring_progress ||
+                        !queryManager.fall_progress ||
+                        !queryManager.summer_progress) {
+                    if (queryManager.winter_progress)
+                        progressBarWinter.setVisibility(View.INVISIBLE);
+                    if (queryManager.spring_progress)
+                        progressBarSpring.setVisibility(View.INVISIBLE);
+                    if (queryManager.fall_progress)
+                        progressBarFall.setVisibility(View.INVISIBLE);
+                    if (queryManager.summer_progress)
+                        progressBarSummer.setVisibility(View.INVISIBLE);
+
                     try {
                         // Sleep for 200 milliseconds.
                         Thread.sleep(200);
@@ -58,60 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Log.d("STOP", "thread stoped");
                 progressBarWinter.setVisibility(View.INVISIBLE);
-                Thread.currentThread().interrupt();
-            }
-        });
-        winter_wait.start();
-        Thread spring_wait = new Thread(new Runnable() {
-            public void run() {
-                while (!queryManager.spring_progress) {
-                    try {
-                        // Sleep for 200 milliseconds.
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Log.d("STOP", "thread stoped");
                 progressBarSpring.setVisibility(View.INVISIBLE);
-                Thread.currentThread().interrupt();
-            }
-        });
-        spring_wait.start();
-        Thread fall_wait = new Thread(new Runnable() {
-            public void run() {
-                while (!queryManager.fall_progress) {
-                    try {
-                        // Sleep for 200 milliseconds.
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Log.d("STOP", "thread stoped");
                 progressBarFall.setVisibility(View.INVISIBLE);
-                Thread.currentThread().interrupt();
-            }
-        });
-        fall_wait.start();
-        Thread summer_wait = new Thread(new Runnable() {
-            public void run() {
-                while (!queryManager.summer_progress) {
-                    try {
-                        // Sleep for 200 milliseconds.
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Log.d("STOP", "thread stoped");
                 progressBarSummer.setVisibility(View.INVISIBLE);
                 Thread.currentThread().interrupt();
             }
         });
-        summer_wait.start();
-
-
+        loader_thread.start();
 
         setImageSeason(MediaSeason.WINTER, R.id.winterButton);
         setImageSeason(MediaSeason.SPRING, R.id.springButton);
