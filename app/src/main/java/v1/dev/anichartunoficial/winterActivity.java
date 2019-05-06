@@ -26,14 +26,15 @@ public class winterActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         linearlayout = findViewById(R.id.mainLinear);
 
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
-        utility.createNewViewCard(mContext, linearlayout);
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
+
+
     }
 
     @Override

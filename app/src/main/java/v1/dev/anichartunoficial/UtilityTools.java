@@ -1,13 +1,14 @@
 package v1.dev.anichartunoficial;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 class UtilityTools {
-    void createNewViewCard(Context mContext, LinearLayout linearlayout) {
+    void createNewViewCard(Context mContext, LinearLayout linearlayout, String text, Drawable image) {
 
         int radius = 35;
         int textSize = 30;
@@ -41,7 +42,7 @@ class UtilityTools {
         );
 
         imageInCard.setLayoutParams(imageLayout);
-        imageInCard.setBackground(mContext.getResources().getDrawable(R.drawable.homepage));
+        imageInCard.setBackground(image);
         imageInCard.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
@@ -54,7 +55,7 @@ class UtilityTools {
 
         textInCard.setLayoutParams(textLayout);
 
-        textInCard.setText("toto");
+        textInCard.setText(text);
 
         textInCard.setTextColor(mContext.getResources().getColor(R.color.backgroundColor));
         textInCard.setTextSize(textSize);
