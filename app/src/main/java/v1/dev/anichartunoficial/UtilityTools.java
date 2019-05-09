@@ -8,6 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 class UtilityTools {
+
+    QueryManager queryManager = new QueryManager();
+
     void createNewViewCard(Context mContext, LinearLayout linearlayout, String text, Drawable image) {
 
         int radius = 35;

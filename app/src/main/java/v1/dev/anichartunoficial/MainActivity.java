@@ -29,12 +29,11 @@ import v1.dev.anichartunoficial.R;
 public class MainActivity extends AppCompatActivity {
 
     Integer year = 2019;
-    QueryManager queryManager = new QueryManager();
+    UtilityTools utility = new UtilityTools();
     private ProgressBar progressBarWinter;
     private ProgressBar progressBarSpring;
     private ProgressBar progressBarFall;
     private ProgressBar progressBarSummer;
-    private Handler handler = new Handler();
 
 
     @Override
@@ -48,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
         Thread loader_thread = new Thread(new Runnable() {
             public void run() {
-                while (!queryManager.winter_progress ||
-                        !queryManager.spring_progress ||
-                        !queryManager.fall_progress ||
-                        !queryManager.summer_progress) {
-                    if (queryManager.winter_progress)
+                while (!utility.queryManager.winter_progress ||
+                        !utility.queryManager.spring_progress ||
+                        !utility.queryManager.fall_progress ||
+                        !utility.queryManager.summer_progress) {
+                    if (utility.queryManager.winter_progress)
                         progressBarWinter.setVisibility(View.INVISIBLE);
-                    if (queryManager.spring_progress)
+                    if (utility.queryManager.spring_progress)
                         progressBarSpring.setVisibility(View.INVISIBLE);
-                    if (queryManager.fall_progress)
+                    if (utility.queryManager.fall_progress)
                         progressBarFall.setVisibility(View.INVISIBLE);
-                    if (queryManager.summer_progress)
+                    if (utility.queryManager.summer_progress)
                         progressBarSummer.setVisibility(View.INVISIBLE);
 
                     try {
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .seasonYear(year)
                 .season(season)
                 .build();
-        queryManager.setImageSeasonQuery(seasonImageQuery, imageButton, idButton, this);
+        utility.queryManager.setImageSeasonQuery(seasonImageQuery, imageButton, idButton, this);
     }
 
 

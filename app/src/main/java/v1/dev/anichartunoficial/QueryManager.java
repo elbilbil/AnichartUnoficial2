@@ -62,8 +62,6 @@ class QueryManager {
                                         imageButton.setImageBitmap(resource);
                                         imageButton.setAdjustViewBounds(true);
                                         imageButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                                        Log.d("TOTOO", String.valueOf(imageButton.getId()));
-                                        Log.d("Image", String.valueOf(R.id.winterButton));
 
                                         switch (imageButton.getId()){
                                             case R.id.winterButton:
