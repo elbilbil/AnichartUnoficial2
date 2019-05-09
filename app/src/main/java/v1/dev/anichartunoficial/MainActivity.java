@@ -29,7 +29,7 @@ import v1.dev.anichartunoficial.R;
 public class MainActivity extends AppCompatActivity {
 
     Integer year = 2019;
-    UtilityTools utility = new UtilityTools();
+    QueryManager queryManager = new QueryManager();
     private ProgressBar progressBarWinter;
     private ProgressBar progressBarSpring;
     private ProgressBar progressBarFall;
@@ -45,19 +45,28 @@ public class MainActivity extends AppCompatActivity {
         progressBarFall = findViewById(R.id.progressBar_fall);
         progressBarSummer = findViewById(R.id.progressBar_summer);
 
+        loaderThread();
+
+        setImageSeason(MediaSeason.WINTER, R.id.winterButton);
+        setImageSeason(MediaSeason.SPRING, R.id.springButton);
+        setImageSeason(MediaSeason.FALL, R.id.fallButton);
+        setImageSeason(MediaSeason.SUMMER, R.id.summerButton);
+    }
+
+    private void loaderThread() {
         Thread loader_thread = new Thread(new Runnable() {
             public void run() {
-                while (!utility.queryManager.winter_progress ||
-                        !utility.queryManager.spring_progress ||
-                        !utility.queryManager.fall_progress ||
-                        !utility.queryManager.summer_progress) {
-                    if (utility.queryManager.winter_progress)
+                while (!queryManager.winter_progress ||
+                        !queryManager.spring_progress ||
+                        !queryManager.fall_progress ||
+                        !queryManager.summer_progress) {
+                    if (queryManager.winter_progress)
                         progressBarWinter.setVisibility(View.INVISIBLE);
-                    if (utility.queryManager.spring_progress)
+                    if (queryManager.spring_progress)
                         progressBarSpring.setVisibility(View.INVISIBLE);
-                    if (utility.queryManager.fall_progress)
+                    if (queryManager.fall_progress)
                         progressBarFall.setVisibility(View.INVISIBLE);
-                    if (utility.queryManager.summer_progress)
+                    if (queryManager.summer_progress)
                         progressBarSummer.setVisibility(View.INVISIBLE);
 
                     try {
@@ -76,11 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         loader_thread.start();
-
-        setImageSeason(MediaSeason.WINTER, R.id.winterButton);
-        setImageSeason(MediaSeason.SPRING, R.id.springButton);
-        setImageSeason(MediaSeason.FALL, R.id.fallButton);
-        setImageSeason(MediaSeason.SUMMER, R.id.summerButton);
     }
 
     private void setImageSeason(MediaSeason season, int idButton) {
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 .seasonYear(year)
                 .season(season)
                 .build();
-        utility.queryManager.setImageSeasonQuery(seasonImageQuery, imageButton, idButton, this);
+        queryManager.setImageSeasonQuery(seasonImageQuery, imageButton, this);
     }
 
 

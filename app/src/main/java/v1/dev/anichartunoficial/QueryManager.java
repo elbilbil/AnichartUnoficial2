@@ -27,11 +27,12 @@ import okhttp3.OkHttpClient;
 
 class QueryManager {
 
+    UtilityTools utilityTools = new UtilityTools();
     private ApolloClient apolloClient;
-    public boolean winter_progress = false;
-    public boolean spring_progress = false;
-    public boolean fall_progress = false;
-    public boolean summer_progress = false;
+    boolean winter_progress = false;
+    boolean spring_progress = false;
+    boolean fall_progress = false;
+    boolean summer_progress = false;
 
     QueryManager(){
         String BASE_URL = "https://graphql.anilist.co/";
@@ -42,8 +43,7 @@ class QueryManager {
                 .build();
     }
 
-
-    public void setImageSeasonQuery(SeasonImageQuery seasonImageQuery, final ImageButton imageButton, final int idButton, final MainActivity mainActivity) {
+    void setImageSeasonQuery(SeasonImageQuery seasonImageQuery, final ImageButton imageButton, final MainActivity mainActivity) {
         apolloClient.query(seasonImageQuery).enqueue(new ApolloCall.Callback<SeasonImageQuery.Data>() {
             @Override
             public void onResponse(@NotNull final Response<SeasonImageQuery.Data> response) {
@@ -87,5 +87,9 @@ class QueryManager {
                 Log.e("Query Error: ", e.getMessage());
             }
         });
+    }
+
+    void getAnimyWithSeason() {
+
     }
 }
