@@ -38,10 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".summerActivity" />
-        <activity android:name=".fallActivity" />
-        <activity android:name=".springActivity" />
-        <activity android:name=".winterActivity" />
     </application>
 
 </manifest>

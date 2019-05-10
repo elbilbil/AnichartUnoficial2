@@ -1,13 +1,32 @@
 package v1.dev.anichartunoficial;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.simple.SeasonImageQuery;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 class UtilityTools {
+
+    HashMap<String, Bitmap> responses = new HashMap<String, Bitmap>();
 
     void createNewViewCard(Context mContext, LinearLayout linearlayout, String text, Drawable image) {
 
@@ -69,5 +88,31 @@ class UtilityTools {
 
         linearlayout.addView(cardView);
 
+    }
+
+    void glideFormat(Activity activity, final String url) {
+        Glide.with(activity)
+            .asBitmap()
+                .load(url)
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        responses.put(url, resource);
+                    }
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
+                });
+        threadReader(url);
+    }
+
+    private void threadReader(@NotNull String uri) {
+        while (responses.get(uri) == null) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

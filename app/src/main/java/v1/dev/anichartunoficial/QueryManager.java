@@ -3,6 +3,7 @@ package v1.dev.anichartunoficial;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -23,11 +24,16 @@ import com.bumptech.glide.request.transition.Transition;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.security.AccessController;
+
 import okhttp3.OkHttpClient;
+
+import static java.security.AccessController.*;
 
 class QueryManager {
 
     UtilityTools utilityTools = new UtilityTools();
+
     private ApolloClient apolloClient;
     boolean winter_progress = false;
     boolean spring_progress = false;
@@ -48,40 +54,34 @@ class QueryManager {
             @Override
             public void onResponse(@NotNull final Response<SeasonImageQuery.Data> response) {
                 assert response.data() != null;
-
-                mainActivity.runOnUiThread(new Runnable() {
-                    @Override
+                final String uri = response.data().Media().coverImage().large();
+                Thread loader_thread = new Thread(new Runnable() {
                     public void run() {
+                        utilityTools.glideFormat(mainActivity, uri);
 
-                        Glide.with(mainActivity)
-                                .asBitmap()
-                                .load(response.data().Media().coverImage().large())
-                                .into(new CustomTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                                        imageButton.setImageBitmap(resource);
-                                        imageButton.setAdjustViewBounds(true);
-                                        imageButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
-
-                                        switch (imageButton.getId()){
-                                            case R.id.winterButton:
-                                                winter_progress = true;
-                                            case R.id.springButton:
-                                                spring_progress = true;
-                                            case R.id.fallButton:
-                                                fall_progress = true;
-                                            case R.id.summerButton:
-                                                summer_progress = true;
-                                        }
-                                    }
-                                    @Override
-                                    public void onLoadCleared(@Nullable Drawable placeholder) {
-                                    }
-                                });
+                        mainActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                imageButton.setImageBitmap(utilityTools.responses.get(uri));
+                                imageButton.setAdjustViewBounds(true);
+                                imageButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                switch (imageButton.getId()) {
+                                    case R.id.winterButton:
+                                        winter_progress = true;
+                                    case R.id.springButton:
+                                        spring_progress = true;
+                                    case R.id.fallButton:
+                                        fall_progress = true;
+                                    case R.id.summerButton:
+                                        summer_progress = true;
+                                }
+                            }
+                        });
+                        Thread.currentThread().interrupt();
                     }
                 });
+                loader_thread.start();
             }
-
             @Override
             public void onFailure(@NotNull ApolloException e) {
                 Log.e("Query Error: ", e.getMessage());
