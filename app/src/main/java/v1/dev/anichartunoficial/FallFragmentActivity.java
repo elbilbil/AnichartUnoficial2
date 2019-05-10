@@ -3,7 +3,6 @@ package v1.dev.anichartunoficial;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.chip.ChipGroup;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -21,10 +20,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
-public class WinterFragmentActivity extends AppCompatActivity
+public class FallFragmentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Context mContext;
@@ -43,7 +40,7 @@ public class WinterFragmentActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_winter_fragment);
+        setContentView(R.layout.activity_fall_fragment);
         mContext = getApplicationContext();
         linearlayout = findViewById(R.id.mainLinear);
 
@@ -117,19 +114,9 @@ public class WinterFragmentActivity extends AppCompatActivity
             }
         });
 
-/*
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        */
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -144,7 +131,7 @@ public class WinterFragmentActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.winter, menu);
+        getMenuInflater().inflate(R.menu.fall, menu);
         return true;
     }
 
@@ -166,6 +153,11 @@ public class WinterFragmentActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        /*
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        */
         return true;
     }
 
