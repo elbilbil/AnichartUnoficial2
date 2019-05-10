@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void winterController(View view) {
-        Intent winterIntent = new Intent(this, winterActivity.class);
+        Intent winterIntent = new Intent(this, WinterFragmentActivity.class);
         startActivity(winterIntent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
