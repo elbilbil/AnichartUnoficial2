@@ -110,7 +110,7 @@ class QueryManager {
                             springFragmentActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    utilityTools.createNewViewCard(mContext, linearlayout, title, utilityTools.responses.get(uri), id);
+                                    utilityTools.createNewViewCard(mContext, linearlayout, title, utilityTools.responses.get(uri), id, springFragmentActivity);
                                 }
                             });
                             Thread.currentThread().interrupt();

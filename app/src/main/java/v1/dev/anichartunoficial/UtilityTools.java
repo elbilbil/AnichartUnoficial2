@@ -2,6 +2,7 @@ package v1.dev.anichartunoficial;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -29,7 +30,7 @@ class UtilityTools {
 
     HashMap<String, Bitmap> responses = new HashMap<String, Bitmap>();
 
-    void createNewViewCard(Context mContext, LinearLayout linearlayout, String text, Bitmap image, int id) {
+    void createNewViewCard(final Context mContext, LinearLayout linearlayout, String text, Bitmap image, int id, final SpringFragmentActivity springFragmentActivity) {
 
         int radius = 35;
         int textSize = 30;
@@ -47,7 +48,9 @@ class UtilityTools {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent winterIntent = new Intent(springFragmentActivity, DetailsActivity.class);
+                springFragmentActivity.startActivity(winterIntent);
+                springFragmentActivity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
 
