@@ -63,14 +63,6 @@ public class FallFragmentActivity extends AppCompatActivity
         type_field.setVisibility(View.GONE);
         name_field.setVisibility(View.GONE);
 
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-
 
         genre_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {

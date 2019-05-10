@@ -19,3 +19,50 @@ query seasonImage($season: MediaSeason, $seasonYear: Int) {
         }
     }
 }
+
+query animeBySeason($season: MediaSeason, $seasonYear: Int) {
+    Page {
+        pageInfo {
+            total
+            perPage
+            currentPage
+            lastPage
+            hasNextPage
+        }
+        media (season: $season, seasonYear: $seasonYear, type: ANIME, sort: [POPULARITY_DESC], format: TV) {
+            id
+            title {
+                userPreferred
+            }
+            coverImage {
+                large
+                medium
+            }
+            description
+            type
+            format
+            episodes
+            chapters
+            volumes
+            genres
+            averageScore
+            popularity
+            startDate {
+                year
+                month
+                day
+            }
+            endDate {
+                year
+                month
+                day
+            }
+            season
+            nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+            }
+        }
+    }
+}

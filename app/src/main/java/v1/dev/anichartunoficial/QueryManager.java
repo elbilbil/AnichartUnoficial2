@@ -1,5 +1,6 @@
 package v1.dev.anichartunoficial;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -10,11 +11,13 @@ import android.util.Log;
 import android.util.Size;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
+import com.apollographql.apollo.simple.AnimeBySeasonQuery;
 import com.apollographql.apollo.simple.SeasonImageQuery;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
@@ -89,7 +92,39 @@ class QueryManager {
         });
     }
 
-    void getAnimyWithSeason() {
+    public void getAnimyWithSeason(AnimeBySeasonQuery animeBySeasonQuery, final Context mContext, final LinearLayout linearlayout, final SpringFragmentActivity springFragmentActivity) {
+        apolloClient.query(animeBySeasonQuery).enqueue(new ApolloCall.Callback<AnimeBySeasonQuery.Data>() {
+            @Override
+            public void onResponse(@NotNull final Response<AnimeBySeasonQuery.Data> response) {
+                assert response.data() != null;
+                int idx = -1;
+                while (++idx < response.data().Page().media().size()) {
+                    final String uri = response.data().Page().media().get(idx).coverImage().large();
+                    final String title = response.data().Page().media().get(idx).title().userPreferred();
+                    final int id = response.data().Page().media().get(idx).id();
 
+                    Thread loader_thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            utilityTools.glideFormat(springFragmentActivity, uri);
+                            springFragmentActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    utilityTools.createNewViewCard(mContext, linearlayout, title, utilityTools.responses.get(uri), id);
+                                }
+                            });
+                            Thread.currentThread().interrupt();
+                        }
+                    });
+                    loader_thread.start();
+                    Log.e("pageInfo", uri);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull ApolloException e) {
+                Log.e("Query Error: ", e.getMessage());
+            }
+        });
     }
 }

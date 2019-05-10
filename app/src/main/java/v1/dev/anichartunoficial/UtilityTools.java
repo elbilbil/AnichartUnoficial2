@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ class UtilityTools {
 
     HashMap<String, Bitmap> responses = new HashMap<String, Bitmap>();
 
-    void createNewViewCard(Context mContext, LinearLayout linearlayout, String text, Drawable image) {
+    void createNewViewCard(Context mContext, LinearLayout linearlayout, String text, Bitmap image, int id) {
 
         int radius = 35;
         int textSize = 30;
@@ -41,7 +42,14 @@ class UtilityTools {
         );
         cardView.setLayoutParams(cardViewLayout);
         cardView.setRadius(radius);
+        cardView.setId(id);
+        cardView.isClickable();
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
         LinearLayout linearlayoutInCard = new LinearLayout(mContext);
 
@@ -62,7 +70,7 @@ class UtilityTools {
         );
 
         imageInCard.setLayoutParams(imageLayout);
-        imageInCard.setBackground(image);
+        imageInCard.setImageBitmap(image);
         imageInCard.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 

@@ -21,12 +21,18 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.apollographql.apollo.simple.AnimeBySeasonQuery;
+import com.apollographql.apollo.simple.SeasonImageQuery;
+import com.apollographql.apollo.simple.type.MediaSeason;
+
 public class SpringFragmentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Integer year = 2019;
+    QueryManager queryManager = new QueryManager();
     private Context mContext;
     private LinearLayout linearlayout;
-    private UtilityTools utility = new UtilityTools();
+    private UtilityTools utilityTools = new UtilityTools();
 
     private CheckBox genre_checkbox;
     private CheckBox type_checkbox;
@@ -44,34 +50,22 @@ public class SpringFragmentActivity extends AppCompatActivity
         mContext = getApplicationContext();
         linearlayout = findViewById(R.id.mainLinear);
 
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        */
+        initFilter();
+        GenerateSpringViewCard();
 
-        genre_checkbox =  findViewById(R.id.genre_checkbox);
-        type_checkbox =  findViewById(R.id.type_checkbox);
-        name_checkbox =  findViewById(R.id.name_checkbox);
-        search_btn =  findViewById(R.id.search_filter);
-        filter_name_input =  findViewById(R.id.filter_name_input);
+        checkboxTri();
+    }
 
-        genre_field =  findViewById(R.id.genre_field);
-        type_field =  findViewById(R.id.type_field);
-        name_field =  findViewById(R.id.name_field);
+    private void GenerateSpringViewCard() {
+        AnimeBySeasonQuery animeBySeasonQuery = AnimeBySeasonQuery
+                .builder()
+                .season(MediaSeason.SPRING)
+                .seasonYear(year)
+                .build();
+        queryManager.getAnimyWithSeason(animeBySeasonQuery, mContext, linearlayout, this);
+    }
 
-        genre_field.setVisibility(View.GONE);
-        type_field.setVisibility(View.GONE);
-        name_field.setVisibility(View.GONE);
-
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-        utility.createNewViewCard(mContext, linearlayout, "toto", getResources().getDrawable(R.drawable.homepage));
-
-
+    private void checkboxTri() {
         genre_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
@@ -117,6 +111,22 @@ public class SpringFragmentActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void initFilter() {
+        genre_checkbox =  findViewById(R.id.genre_checkbox);
+        type_checkbox =  findViewById(R.id.type_checkbox);
+        name_checkbox =  findViewById(R.id.name_checkbox);
+        search_btn =  findViewById(R.id.search_filter);
+        filter_name_input =  findViewById(R.id.filter_name_input);
+
+        genre_field =  findViewById(R.id.genre_field);
+        type_field =  findViewById(R.id.type_field);
+        name_field =  findViewById(R.id.name_field);
+
+        genre_field.setVisibility(View.GONE);
+        type_field.setVisibility(View.GONE);
+        name_field.setVisibility(View.GONE);
     }
 
     @Override
