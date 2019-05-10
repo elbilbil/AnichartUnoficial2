@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="v1.dev.anichartunoficial">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,19 +14,34 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
-        <activity android:name="v1.dev.anichartunoficial.MainActivity">
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".SummerFragmentActivity"
+            android:label="@string/title_activity_summer_fragment"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".FallFragmentActivity"
+            android:label="@string/title_activity_fall_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SpringFragmentActivity"
+            android:label="@string/title_activity_spring_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WinterFragmentActivity"
+            android:label="@string/title_activity_winter_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="v1.dev.anichartunoficial.summerActivity" />
-        <activity android:name="v1.dev.anichartunoficial.fallActivity" />
-        <activity android:name="v1.dev.anichartunoficial.springActivity" />
-        <activity android:name="v1.dev.anichartunoficial.winterActivity" />
+        <activity android:name=".summerActivity" />
+        <activity android:name=".fallActivity" />
+        <activity android:name=".springActivity" />
+        <activity android:name=".winterActivity" />
     </application>
 
 </manifest>

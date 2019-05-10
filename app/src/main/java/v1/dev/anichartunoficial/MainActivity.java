@@ -99,25 +99,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void winterController(View view) {
-        Intent winterIntent = new Intent(this, winterActivity.class);
+        Intent winterIntent = new Intent(this, WinterFragmentActivity.class);
         startActivity(winterIntent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void springController(View view) {
-        Intent springIntent = new Intent(this, springActivity.class);
+        Intent springIntent = new Intent(this, SpringFragmentActivity.class);
         startActivity(springIntent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void summerController(View view) {
-        Intent summerIntent = new Intent(this, summerActivity.class);
+        Intent summerIntent = new Intent(this, SummerFragmentActivity.class);
         startActivity(summerIntent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void fallController(View view) {
-        Intent fallIntent = new Intent(this, fallActivity.class);
+        Intent fallIntent = new Intent(this, FallFragmentActivity.class);
         startActivity(fallIntent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
