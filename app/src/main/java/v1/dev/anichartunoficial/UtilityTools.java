@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.simple.AnimeBySeasonQuery;
 import com.apollographql.apollo.simple.SeasonImageQuery;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -22,6 +24,7 @@ import com.bumptech.glide.request.transition.Transition;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,12 +32,16 @@ import java.util.concurrent.TimeUnit;
 class UtilityTools {
 
     HashMap<String, Bitmap> responses = new HashMap<String, Bitmap>();
+    HashMap<Integer, AnimeBySeasonQuery.Medium> map = new HashMap<Integer, AnimeBySeasonQuery.Medium>();
 
-    void createNewViewCard(final Context mContext, LinearLayout linearlayout, String text, Bitmap image, int id, final SpringFragmentActivity springFragmentActivity) {
+    void createNewViewCard(final Context mContext, LinearLayout linearlayout, String text, Bitmap image, final int id, final SpringFragmentActivity springFragmentActivity, final AnimeBySeasonQuery.Medium medium) {
 
         int radius = 35;
         int textSize = 30;
 
+
+
+        map.put(id, medium);
         CardView cardView = new CardView(mContext);
 
         LinearLayout.LayoutParams cardViewLayout = new LinearLayout.LayoutParams(
@@ -48,8 +55,12 @@ class UtilityTools {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent winterIntent = new Intent(springFragmentActivity, DetailsActivity.class);
-                springFragmentActivity.startActivity(winterIntent);
+                Intent detailIntent = new Intent(springFragmentActivity, DetailsActivity.class);
+//                detailIntent.putExtra("anime", map);
+//                detailIntent.putExtra("image", medium.coverImage().large());
+//                detailIntent.putExtra("episode", medium.episodes().intValue());
+//                detailIntent.putExtra("id", id);
+                springFragmentActivity.startActivity(detailIntent);
                 springFragmentActivity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
@@ -120,7 +131,7 @@ class UtilityTools {
     private void threadReader(@NotNull String uri) {
         while (responses.get(uri) == null) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

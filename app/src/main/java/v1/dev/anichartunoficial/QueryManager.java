@@ -99,9 +99,10 @@ class QueryManager {
                 assert response.data() != null;
                 int idx = -1;
                 while (++idx < response.data().Page().media().size()) {
-                    final String uri = response.data().Page().media().get(idx).coverImage().large();
-                    final String title = response.data().Page().media().get(idx).title().userPreferred();
-                    final int id = response.data().Page().media().get(idx).id();
+                    final AnimeBySeasonQuery.Medium medium = response.data().Page().media().get(idx);
+                    final String uri = medium.coverImage().large();
+                    final String title = medium.title().userPreferred();
+                    final int id = medium.id();
 
                     Thread loader_thread = new Thread(new Runnable() {
                         @Override
@@ -110,14 +111,13 @@ class QueryManager {
                             springFragmentActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    utilityTools.createNewViewCard(mContext, linearlayout, title, utilityTools.responses.get(uri), id, springFragmentActivity);
+                                    utilityTools.createNewViewCard(mContext, linearlayout, title, utilityTools.responses.get(uri), id, springFragmentActivity, medium);
                                 }
                             });
                             Thread.currentThread().interrupt();
                         }
                     });
                     loader_thread.start();
-                    Log.e("pageInfo", uri);
                 }
             }
 

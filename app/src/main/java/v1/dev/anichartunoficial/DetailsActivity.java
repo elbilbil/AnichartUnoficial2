@@ -5,12 +5,19 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.apollographql.apollo.simple.AnimeBySeasonQuery;
+
+import java.util.HashMap;
+
 public class DetailsActivity extends AppCompatActivity {
 
+    HashMap<Integer, AnimeBySeasonQuery.Medium> map = new HashMap<Integer, AnimeBySeasonQuery.Medium>();
+    int id = 0;
     private TextView description;
     private ImageButton animeImage;
     private UtilityTools utilityTools = new UtilityTools();
@@ -20,6 +27,10 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+       // map = (HashMap<Integer, AnimeBySeasonQuery.Medium>) getIntent().getSerializableExtra("anime");
+        id = getIntent().getExtras().getInt("id");
+        Log.e("son ID : ", String.valueOf(id));
+        //Log.e("ICI", map.get(id).toString());
 
         description = findViewById(R.id.description);
         animeImage = findViewById(R.id.animeImage);
